@@ -1,0 +1,1 @@
+SELECT * FROM vehicles INNER JOIN users ON vehicles.owner_id = user.id WHERE user.email = $1;
