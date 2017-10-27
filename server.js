@@ -88,7 +88,12 @@ app.get('/api/users', function(req, res, next){
 	})
 															 
     })
-    .delete('/api/vehicle/:vehicleId', (req, res, next) => {
+    .delete('/api/user/:userId/vehicle/:vehicleId', (req, res, next) => {
+	app.get('db').run(`UPDATE vehicles SET owner_id = null WHERE id = ${req.params.vehicleId} RETURNING *`).then(response => {
+	    res.send(response);
+	})
+    })
+    .delete('/api/vehicle/:vehicleId/', (req, res, next) => {
 	app.get('db').run(`DELETE FROM vehicles WHERE id = ${req.params.vehicleId} RETURNING *`).then(response => {
 	    res.send(response)
 	})
